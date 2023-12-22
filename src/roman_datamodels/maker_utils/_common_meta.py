@@ -445,6 +445,7 @@ def mk_mosaic_meta(**kwargs):
     """
 
     meta = {}
+    meta["filename"] = None
     meta["basic"] = mk_mosaic_basic(**kwargs.get("basic", {}))
     meta["individual_image_meta"] = mk_individual_image_meta(**kwargs.get("individual_image_meta", {}))
     meta["program"] = mk_program(**kwargs.get("program", {}))
