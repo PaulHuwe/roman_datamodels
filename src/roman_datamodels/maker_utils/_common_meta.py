@@ -415,6 +415,7 @@ def mk_common_meta(**kwargs):
     meta["velocity_aberration"] = mk_velocity_aberration(**kwargs.get("velocity_aberration", {}))
     meta["visit"] = mk_visit(**kwargs.get("visit", {}))
     meta["wcsinfo"] = mk_wcsinfo(**kwargs.get("wcsinfo", {}))
+    meta["wcs"] = None
 
     return meta
 
@@ -444,13 +445,13 @@ def mk_mosaic_meta(**kwargs):
     dict (defined by the wfi_mosaic-1.0.0 schema)
     """
 
-    meta = {}
-    meta["filename"] = None
+    meta = mk_basic_meta(**kwargs)
     meta["basic"] = mk_mosaic_basic(**kwargs.get("basic", {}))
     meta["individual_image_meta"] = mk_individual_image_meta(**kwargs.get("individual_image_meta", {}))
     meta["program"] = mk_program(**kwargs.get("program", {}))
     meta["resample"] = mk_resample(**kwargs.get("resample", {}))
     meta["wcsinfo"] = mk_mosaic_wcsinfo(**kwargs.get("wcsinfo", {}))
+    meta["wcs"] = None
 
     return meta
 
