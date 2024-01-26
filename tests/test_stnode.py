@@ -339,7 +339,6 @@ def test_node_representation(model):
                     "time_mean_mjd": -999999,
                     "max_exposure_time": -999999,
                     "mean_exposure_time": -999999,
-                    "model_type": "MosaicModel",
                     "visit": -999999,
                     "segment": -999999,
                     "pass_number": -999999,
