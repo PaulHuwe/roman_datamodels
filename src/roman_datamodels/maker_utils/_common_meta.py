@@ -666,7 +666,6 @@ def mk_mosaic_basic(**kwargs):
     mosbasic["time_mean_mjd"] = kwargs.get("time_mean_mjd", NONUM)
     mosbasic["max_exposure_time"] = kwargs.get("max_exposure_time", NONUM)
     mosbasic["mean_exposure_time"] = kwargs.get("mean_exposure_time", NONUM)
-    mosbasic["model_type"] = kwargs.get("model_type", NOSTR)
     mosbasic["visit"] = kwargs.get("visit", NONUM)
     mosbasic["segment"] = kwargs.get("segment", NONUM)
     mosbasic["pass_number"] = kwargs.get("pass_number", NONUM)
