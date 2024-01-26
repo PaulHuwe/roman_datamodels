@@ -415,7 +415,6 @@ def mk_common_meta(**kwargs):
     meta["velocity_aberration"] = mk_velocity_aberration(**kwargs.get("velocity_aberration", {}))
     meta["visit"] = mk_visit(**kwargs.get("visit", {}))
     meta["wcsinfo"] = mk_wcsinfo(**kwargs.get("wcsinfo", {}))
-    meta["wcs"] = kwargs.get("wcs", None)
 
     return meta
 
@@ -451,7 +450,6 @@ def mk_mosaic_meta(**kwargs):
     meta["program"] = mk_program(**kwargs.get("program", {}))
     meta["resample"] = mk_resample(**kwargs.get("resample", {}))
     meta["wcsinfo"] = mk_mosaic_wcsinfo(**kwargs.get("wcsinfo", {}))
-    meta["wcs"] = kwargs.get("wcs", None)
 
     return meta
 
