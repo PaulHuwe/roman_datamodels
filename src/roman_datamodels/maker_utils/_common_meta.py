@@ -676,7 +676,6 @@ def mk_mosaic_basic(**kwargs):
     mosbasic["location_name"] = kwargs.get("location_name", NOSTR)
     mosbasic["product_type"] = kwargs.get("product_type", NOSTR)
 
-
     return mosbasic
 
 
@@ -730,7 +729,7 @@ def mk_individual_image_meta(**kwargs):
 
     imm = stnode.IndividualImageMeta()
 
-    table_dct = {"dummy":[NONUM]}
+    table_dct = {"dummy": [NONUM]}
 
     imm["basic"] = kwargs.get("basic", QTable(table_dct))
     imm["aperture"] = kwargs.get("aperture", QTable(table_dct))

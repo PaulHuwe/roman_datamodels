@@ -61,7 +61,7 @@ class MosaicModel(_RomanDataModel):
             Metadata from a component image of the mosiac.
         """
 
-        # Convert input to a dictionary, if neccesary
+        # Convert input to a dictionary, if necessary
         if not isinstance(meta, dict):
             meta_dict = meta.to_flat_dict()
         else:
@@ -74,7 +74,7 @@ class MosaicModel(_RomanDataModel):
         # Sift through meta items to place in tables
         for key, value in meta_dict.items():
             # Skip wcs objects
-            if (key == 'wcs'):
+            if key == "wcs":
                 continue
 
             # Keys that are themselves Dnodes (subdirectories)
