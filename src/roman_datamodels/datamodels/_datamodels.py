@@ -87,10 +87,13 @@ class MosaicModel(_RomanDataModel):
                     # Skip ndarrays
                     if isinstance(subvalue, asdf.tags.core.ndarray.NDArrayType):
                         continue
+                    # Skip QTables
+                    if isinstance(subvalue, QTable):
+                        continue
 
                     subtable_cols.append(subkey)
 
-                    if isinstance(subvalue, list):
+                    if isinstance(subvalue, (list, dict)):
                         subtable_vals.append([str(subvalue)])
                     else:
                         subtable_vals.append([subvalue])
@@ -105,11 +108,16 @@ class MosaicModel(_RomanDataModel):
                 else:
                     # Append to existing table
                     self.meta.individual_image_meta[key].add_row(subtable_vals)
+            # Skip non-schema metas
+            elif isinstance(value, dict):
+                continue
+            # Skip ndarrays
+            elif isinstance(value.strip(), asdf.tags.core.ndarray.NDArrayType):
+                continue
+            # Skip QTables
+            elif isinstance(value, QTable):
+                continue
             else:
-                # Skip ndarrays
-                if isinstance(value.strip(), asdf.tags.core.ndarray.NDArrayType):
-                    continue
-
                 # Store Basic keyword
                 basic_cols.append(key)
 
