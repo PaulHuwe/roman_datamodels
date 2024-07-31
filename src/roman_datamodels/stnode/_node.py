@@ -506,12 +506,8 @@ class DNode(MutableMapping):
             value = self._convert_to_scalar(key, value)
 
         # If the value is a dictionary, loop over its keys and convert them to tagged scalars
-<<<<<<< HEAD
-        if isinstance(value, dict):
-            print("RRRR2 this is a dict!")
-=======
         if isinstance(value, (dict, asdf.lazy_nodes.AsdfDictNode)):
->>>>>>> 911485a5913e61a42dc0b79c83325eadec310d3a
+            print("RRRR2 this is a dict!")
             for sub_key, sub_value in value.items():
                 # if self._tag and "/tvac" in self._tag:
                 if (self._tag and "/tvac" in self._tag) or (".Tvac" in str(type(self._parent))):

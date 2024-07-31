@@ -200,16 +200,17 @@ class RampModel(_RomanDataModel):
                 if key == "resultantdq":
                     continue
                 if key in self:
+                    print(f"GGGGG key {key} is being updated!")
                     if isinstance(self[key], Mapping):
                         node_update(self[key], other.__getattr__(key))
-                        continue
-                    if isinstance(self[key], list):
+                        # continue
+                    elif isinstance(self[key], list):
                         self[key] = other.__getattr__(key).data
-                        continue
-                    if isinstance(self[key], np.ndarray):
+                        # continue
+                    elif isinstance(self[key], np.ndarray):
                         self[key] = other.__getattr__(key).astype(self[key].dtype)
-                        continue
-                    if type(other[key]) in (TVAC_SCALAR_NODES + FPS_SCALAR_NODES):
+                        # continue
+                    elif type(other[key]) in (TVAC_SCALAR_NODES + FPS_SCALAR_NODES):
                         # self[key] = other.__getattr__(key).astype(type(self[key]))
                         # print(f"GGGG {key} is found.. trying to reset!")
                         # self[key].value = other[key].__repr__()
@@ -218,20 +219,36 @@ class RampModel(_RomanDataModel):
                         # self[key].value = mk_common_meta(meta={key:other.__getattr__(key)})[key]
                         # self[key] = mk_common_meta(key=other[key])[key]
                         self[key] = mk_basic_meta(**{key:other[key]})[key]
-                        # print(f"GGGG {key} is found.. trying to reset! other[key] = {other[key]} self[key] = {self[key]}")
-                        continue
-                    if isinstance(dict, type(other[key])):
-                        self[key] = other.__getattr__(key).data
-                        print(f"GGGGG node_update in _datamodels - key {key} is getting set")
-                        continue
+                        print(f"GGGG {key} is found.. trying to reset! other[key] = {other[key]} self[key] = {self[key]}")
+                        # continue
+                    # if isinstance(type(other[key]), (dict, stnode.DNode, asdf.lazy_nodes.AsdfDictNode)):
+                    #     self[key] = other.__getattr__(key).data
+                    #     print(f"GGGGG node_update in _datamodels - key {key} is getting set")
+                    #     continue
+                    elif isinstance(type(other[key]), (dict, stnode.DNode, asdf.lazy_nodes.AsdfDictNode)):
+                        for sub_key, sub_value in value.items():
+                            # if self._tag and "/tvac" in self._tag:
+                            if (self._tag and "/tvac" in self._tag) or (".Tvac" in str(type(self._parent))):
+                                value[sub_key] = self._convert_to_scalar("tvac_" + sub_key, sub_value)
+                            # elif self._tag and "/fps" in self._tag:
+                            elif (self._tag and "/fps" in self._tag) or (".Fps" in str(type(self._parent))):
+                                value[sub_key] = self._convert_to_scalar("fps_" + sub_key, sub_value)
+                            else:
+                                value[sub_key] = self._convert_to_scalar(sub_key, sub_value)
+                            print(f"GGGGG {sub_key} sub_value = {sub_value}")
+                            print(f"GGGGG {sub_key} type(sub_value) = {type(sub_value)}")
+                            print(f"GGGGG {sub_key} value[sub_key] = {value[sub_key]}")
+                            print(f"GGGGG {sub_key} type(value[sub_key]) = {type(value[sub_key])}")
+                        # continue
                     # if type(other[key]) in (stnode._registry.NODE_CONVERTERS['TaggedObjectNodeConverter'].types,
                     #                         stnode._registry.NODE_CONVERTERS['TaggedListNodeConverter'].types,
                     #                         stnode._registry.NODE_CONVERTERS['TaggedScalarNodeConverter'].types):
                     #     self[key] = other.__getattr__(key)
                     #     continue
                     # self[key] = other[key]
-                print(f"other = {other}; key = {key}")
-                self[key] = other.__getattr__(key)
+                    else:
+                        print(f"other = {other}; key = {key}")
+                        self[key] = other.__getattr__(key)
                 # if isinstance(dict, type(other[key])):
                 #     print(f"GGGGG node_update in _datamodels - key {key} is getting set in default manner")
 
