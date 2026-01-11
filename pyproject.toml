@@ -10,6 +10,7 @@ classifiers = [
   "Programming Language :: Python :: 3",
 ]
 dependencies = [
+<<<<<<< HEAD
   "asdf >=4.1.0",
   "lz4 >= 4.3.0",
   "asdf-astropy >=0.8.0",
@@ -21,6 +22,16 @@ dependencies = [
   "asdf-standard >=1.1.0",
   "pyarrow >= 10.0.1",
   "semantic_version>=2.8",
+=======
+    "asdf >=3.3.0",
+    "asdf-astropy >=0.5.0",
+    "gwcs >=0.19.0",
+    "numpy >=1.22",
+    "astropy >=5.3.0",
+    "rad >= 0.21.0",
+    # "rad @ git+https://github.com/spacetelescope/rad.git",
+    "asdf-standard >=1.1.0",
+>>>>>>> a76b105 (Updated RAD pointing.)
 ]
 license-files = ["LICENSE"]
 dynamic = ["version"]
